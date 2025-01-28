@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbe2osyl80kep"]
+
+[ext_resource type="Script" path="res://Ball.gd" id="1_o0514"]
+[ext_resource type="AudioStream" uid="uid://cdky05oxcmq2i" path="res://bounce.mp3" id="2_bxt4h"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_p02vn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abhq0"]
+size = Vector2(28, 28)
+
+[node name="Ball" type="Node2D"]
+script = ExtResource("1_o0514")
+direction = Vector2(1, 0)
+speed = 4.0
+maxSpeed = 200.0
+speedIncrease = 4.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(28, 28)
+texture = SubResource("CanvasTexture_p02vn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_abhq0")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bxt4h")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,169 @@
+[gd_scene load_steps=16 format=3 uid="uid://cyto2cjleuyvo"]
+
+[ext_resource type="Texture2D" uid="uid://b2wmiwo027505" path="res://Background.png" id="1_jdia1"]
+[ext_resource type="Texture2D" uid="uid://rfowtfbq66u" path="res://godot logo.png" id="2_0cdm7"]
+[ext_resource type="Texture2D" uid="uid://d10x5skkl7xon" path="res://Jeff.png" id="3_8p618"]
+[ext_resource type="Theme" uid="uid://b4txlttb1rpk1" path="res://button_theme.tres" id="4_fo0x7"]
+[ext_resource type="Script" path="res://BackButton.gd" id="5_m75wd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7opd2"]
+font_size = 56
+
+[sub_resource type="LabelSettings" id="LabelSettings_knnve"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_6d6wh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cvyv6"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_00vp1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lac0"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_1m3eh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1l0a8"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_lrycs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6aexo"]
+font_size = 26
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("1_jdia1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 45.0
+offset_right = 817.0
+offset_bottom = 126.0
+text = "Credits"
+label_settings = SubResource("LabelSettings_7opd2")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 130.0
+offset_right = 1208.0
+offset_bottom = 175.0
+text = "Created with"
+label_settings = SubResource("LabelSettings_knnve")
+horizontal_alignment = 1
+
+[node name="GodotLogo" type="Sprite2D" parent="Label2"]
+position = Vector2(178, 158)
+scale = Vector2(0.180565, 0.180565)
+texture = ExtResource("2_0cdm7")
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 468.0
+offset_right = 1143.0
+offset_bottom = 570.0
+text = "Special Thanks"
+label_settings = SubResource("LabelSettings_6d6wh")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Label4"]
+offset_left = -2.0
+offset_top = 24.0
+offset_right = 953.0
+offset_bottom = 138.0
+text = "To You, the Player!
+To SDG Games and his \"20 games challenge\":
+https://20_games_challenge.gitlab.io/"
+label_settings = SubResource("LabelSettings_cvyv6")
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="."]
+offset_left = 134.0
+offset_top = 287.0
+offset_right = 240.0
+offset_bottom = 332.0
+text = "Programming"
+label_settings = SubResource("LabelSettings_00vp1")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Label6"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 293.0
+offset_bottom = 123.0
+text = "Kirill \"TheCbI4\" Sergushin"
+label_settings = SubResource("LabelSettings_6lac0")
+horizontal_alignment = 1
+
+[node name="Jeff" type="Sprite2D" parent="Label6"]
+position = Vector2(48, 105)
+scale = Vector2(0.0794272, 0.0794272)
+texture = ExtResource("3_8p618")
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 137.0
+offset_top = 147.0
+offset_right = 321.0
+offset_bottom = 197.0
+text = "Creator of original Pong"
+label_settings = SubResource("LabelSettings_1m3eh")
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="Label7"]
+offset_top = 20.0
+offset_right = 151.0
+offset_bottom = 101.0
+text = "Allan Alcorn"
+label_settings = SubResource("LabelSettings_1l0a8")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 411.0
+offset_top = 680.0
+offset_right = 913.0
+offset_bottom = 783.0
+text = "2025"
+label_settings = SubResource("LabelSettings_6lac0")
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="."]
+offset_left = 137.0
+offset_top = 217.0
+offset_right = 172.0
+offset_bottom = 267.0
+text = "Font"
+label_settings = SubResource("LabelSettings_lrycs")
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="Label8"]
+offset_top = 20.0
+offset_right = 438.0
+offset_bottom = 56.0
+text = "https://www.mattlag.com/bitfonts/"
+label_settings = SubResource("LabelSettings_6aexo")
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 609.0
+offset_top = 637.0
+offset_right = 721.0
+offset_bottom = 679.0
+theme = ExtResource("4_fo0x7")
+text = "Back"
+script = ExtResource("5_m75wd")
+
+[connection signal="button_down" from="BackButton" to="BackButton" method="_on_button_down"]

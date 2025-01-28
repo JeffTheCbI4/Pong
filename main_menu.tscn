@@ -1,0 +1,175 @@
+[gd_scene load_steps=10 format=3 uid="uid://7nd8l7ml2hdt"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_52q75"]
+[ext_resource type="Texture2D" uid="uid://b2wmiwo027505" path="res://Background.png" id="1_yinki"]
+[ext_resource type="FontFile" uid="uid://d21yd7grhd6l3" path="res://bit5x3.ttf" id="2_ig6xl"]
+[ext_resource type="Theme" uid="uid://b4txlttb1rpk1" path="res://button_theme.tres" id="4_hmakv"]
+[ext_resource type="Script" path="res://EventBus.gd" id="4_we6ue"]
+[ext_resource type="Texture2D" uid="uid://b3ttsr6jejpas" path="res://TriangleButton.png" id="6_2oa1s"]
+[ext_resource type="Texture2D" uid="uid://uy7v28lvqse" path="res://TriangleButtonPressed.png" id="7_5wfml"]
+[ext_resource type="PackedScene" uid="uid://cbyyfiahu7qkl" path="res://chooser.tscn" id="8_lst4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmkoj"]
+font = ExtResource("2_ig6xl")
+font_size = 154
+
+[node name="main_menu" type="Node2D"]
+script = ExtResource("1_52q75")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("1_yinki")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 513.0
+offset_top = 100.0
+offset_right = 821.0
+offset_bottom = 217.0
+text = "Pong"
+label_settings = SubResource("LabelSettings_pmkoj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 718.0
+
+[node name="PlayButton" type="Button" parent="MainButtons"]
+layout_mode = 0
+offset_left = 604.0
+offset_top = 294.0
+offset_right = 716.0
+offset_bottom = 336.0
+theme = ExtResource("4_hmakv")
+theme_override_font_sizes/font_size = 56
+text = "PLay"
+script = ExtResource("4_we6ue")
+
+[node name="ExitButton" type="Button" parent="MainButtons"]
+layout_mode = 0
+offset_left = 603.0
+offset_top = 423.0
+offset_right = 715.0
+offset_bottom = 465.0
+theme = ExtResource("4_hmakv")
+theme_override_font_sizes/font_size = 56
+text = "Exit"
+
+[node name="Credits" type="Button" parent="MainButtons"]
+layout_mode = 0
+offset_left = 561.0
+offset_top = 357.0
+offset_right = 757.0
+offset_bottom = 399.0
+theme = ExtResource("4_hmakv")
+text = "Credits"
+
+[node name="GameSettings" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 386.0
+offset_top = 268.0
+offset_right = 925.0
+offset_bottom = 645.0
+
+[node name="AICheckBox" type="CheckBox" parent="GameSettings"]
+layout_mode = 0
+offset_left = 614.0
+offset_top = 63.0
+offset_right = 662.0
+offset_bottom = 111.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_hmakv")
+
+[node name="MaxScoreLabel" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -207.0
+offset_top = 64.0
+offset_right = 59.0
+offset_bottom = 106.0
+theme = ExtResource("4_hmakv")
+text = "Max score:"
+
+[node name="MaxScoreValueLabel" type="Label" parent="GameSettings"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 65.0
+offset_right = 155.0
+offset_bottom = 107.0
+theme = ExtResource("4_hmakv")
+text = "0"
+
+[node name="MaxScoreUpButton" type="TextureButton" parent="GameSettings"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 33.0
+offset_right = 162.0
+offset_bottom = 81.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_2oa1s")
+texture_pressed = ExtResource("7_5wfml")
+
+[node name="MaxScoreDownButton" type="TextureButton" parent="GameSettings"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 132.0
+offset_right = 186.0
+offset_bottom = 180.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_2oa1s")
+texture_pressed = ExtResource("7_5wfml")
+
+[node name="AILabel" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 301.0
+offset_top = 62.0
+offset_right = 595.0
+offset_bottom = 104.0
+theme = ExtResource("4_hmakv")
+text = "Against ai:"
+
+[node name="StartGameButton" type="Button" parent="GameSettings"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 320.0
+offset_right = 356.0
+offset_bottom = 362.0
+theme = ExtResource("4_hmakv")
+text = "Start"
+
+[node name="MaxScoreLabel2" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 92.0
+offset_top = -37.0
+offset_right = 456.0
+offset_bottom = 5.0
+theme = ExtResource("4_hmakv")
+text = "Game Settings"
+
+[node name="Chooser" parent="GameSettings" instance=ExtResource("8_lst4h")]
+position = Vector2(317, 136)
+
+[node name="CancelButton" type="Button" parent="GameSettings"]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 365.0
+offset_right = 371.0
+offset_bottom = 407.0
+theme = ExtResource("4_hmakv")
+text = "Cancel"
+
+[connection signal="button_down" from="MainButtons/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="pressed" from="MainButtons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="button_down" from="MainButtons/Credits" to="." method="_on_credits_button_down"]
+[connection signal="toggled" from="GameSettings/AICheckBox" to="." method="_on_ai_check_box_toggled"]
+[connection signal="button_down" from="GameSettings/MaxScoreUpButton" to="." method="_on_max_score_up_button_button_down"]
+[connection signal="button_down" from="GameSettings/MaxScoreDownButton" to="." method="_on_max_score_down_button_button_down"]
+[connection signal="button_down" from="GameSettings/StartGameButton" to="." method="_on_start_game_button_button_down"]
+[connection signal="button_down" from="GameSettings/CancelButton" to="." method="_on_cancel_button_button_down"]

@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://c3fuhr6cl8n38"]
+
+[ext_resource type="Script" path="res://PongBoard.gd" id="1_wy5am"]
+[ext_resource type="Texture2D" uid="uid://b2wmiwo027505" path="res://Background.png" id="2_d0aey"]
+[ext_resource type="PackedScene" uid="uid://8eormd4ho5oo" path="res://Player.tscn" id="3_e3kx3"]
+[ext_resource type="PackedScene" uid="uid://dwdehmuyi6gsb" path="res://wall.tscn" id="4_6714y"]
+[ext_resource type="PackedScene" uid="uid://cbe2osyl80kep" path="res://ball.tscn" id="5_yca6y"]
+[ext_resource type="FontFile" uid="uid://d21yd7grhd6l3" path="res://bit5x3.ttf" id="6_luqmy"]
+[ext_resource type="AudioStream" uid="uid://dtynempt4xgfu" path="res://ScoreSound.mp3" id="7_3q416"]
+[ext_resource type="Script" path="res://PongAI.gd" id="8_7x76g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1on7b"]
+font = ExtResource("6_luqmy")
+font_size = 128
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4hb6"]
+size = Vector2(20, 698)
+
+[sub_resource type="LabelSettings" id="LabelSettings_onlgw"]
+font = ExtResource("6_luqmy")
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_x107n"]
+font = ExtResource("6_luqmy")
+font_size = 64
+
+[node name="PongBoard" type="Node2D"]
+script = ExtResource("1_wy5am")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("2_d0aey")
+
+[node name="Player1" parent="." instance=ExtResource("3_e3kx3")]
+position = Vector2(31, 360)
+speed = 20.0
+bottomMaxPoint = 720.0
+
+[node name="Player2" parent="." instance=ExtResource("3_e3kx3")]
+position = Vector2(1249, 360)
+speed = 20.0
+bottomMaxPoint = 720.0
+
+[node name="UpperWall" parent="." instance=ExtResource("4_6714y")]
+position = Vector2(640, 5)
+
+[node name="LowerWall" parent="." instance=ExtResource("4_6714y")]
+position = Vector2(640, 715)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(640, 720, 640, 0)
+width = 1.0
+texture_mode = 1
+
+[node name="Ball" parent="." instance=ExtResource("5_yca6y")]
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+direction = Vector2(-1, -1)
+speed = 8.0
+maxSpeed = 30.0
+speedIncrease = 2.5
+
+[node name="Player1Score" type="Label" parent="."]
+offset_left = 291.0
+offset_top = 43.0
+offset_right = 367.0
+offset_bottom = 218.0
+text = "0"
+label_settings = SubResource("LabelSettings_1on7b")
+
+[node name="Player2Score" type="Label" parent="."]
+offset_left = 940.0
+offset_top = 43.0
+offset_right = 1016.0
+offset_bottom = 218.0
+text = "0"
+label_settings = SubResource("LabelSettings_1on7b")
+
+[node name="Player1Field" type="Area2D" parent="."]
+position = Vector2(10, 360)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1Field"]
+shape = SubResource("RectangleShape2D_g4hb6")
+
+[node name="Player2Field" type="Area2D" parent="."]
+position = Vector2(1270, 360)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2Field"]
+shape = SubResource("RectangleShape2D_g4hb6")
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3q416")
+
+[node name="Labels" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WinningLabel" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 192.0
+offset_right = 1071.0
+offset_bottom = 321.0
+text = "Player 1 wins!"
+label_settings = SubResource("LabelSettings_onlgw")
+script = ExtResource("8_7x76g")
+
+[node name="WinningLabel2" type="Label" parent="Labels"]
+layout_mode = 2
+offset_left = 362.0
+offset_top = 312.0
+offset_right = 938.0
+offset_bottom = 360.0
+text = "Press r to restart"
+label_settings = SubResource("LabelSettings_x107n")
+
+[node name="WinningLabel3" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 368.0
+offset_right = 1130.0
+offset_bottom = 416.0
+text = "Press ESC to quit to main menu"
+label_settings = SubResource("LabelSettings_x107n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="Player1Field" to="." method="_on_player_1_field_area_entered"]
+[connection signal="area_entered" from="Player2Field" to="." method="_on_player_2_field_area_entered"]
