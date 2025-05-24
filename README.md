@@ -5,4 +5,5 @@ Play it online! https://jeffthecbi4.itch.io/pong?secret=wvk5CecLbfLLSpg1QTDVG7bl
 
 ## Controls
 Player1 (on the left): W and S
+
 Player2 (on the right): ^ and v arrow key
